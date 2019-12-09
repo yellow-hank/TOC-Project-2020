@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "state1", "state2","state3","find_flight"],
     transitions=[
         {
             "trigger": "advance",
@@ -28,7 +28,21 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state3",
+            "conditions": "is_going_to_state3",
+        },
+        {
+            "trigger": "forward",
+            "source": "state3",
+            "dest": "find_flight",
+            "conditions": "is_going_to_find_flight",
+        },
+        {"trigger": "gobackitself", "source": ["find_flight"], "dest": "find_flight"}
+        ,
+        {"trigger": "go_back", "source": ["state1", "state2","state3","find_flight"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -104,7 +118,7 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班")
 
     return "OK"
 
