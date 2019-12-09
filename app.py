@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2","state3","find_flight"],
+    states=["user", "state1", "state2","state3","find_flight","find_flight1"],
     transitions=[
         {
             "trigger": "advance",
@@ -35,14 +35,19 @@ machine = TocMachine(
             "conditions": "is_going_to_state3",
         },
         {
-            "trigger": "forward",
+            "trigger": "advance",
             "source": "state3",
             "dest": "find_flight",
             "conditions": "is_going_to_find_flight",
+        },{
+            "trigger": "advance",
+            "source": "find_flight",
+            "dest": "find_flight1",
+            "conditions": "is_going_to_find_flight",
         },
-        {"trigger": "gobackitself", "source": ["find_flight"], "dest": "find_flight"}
-        ,
-        {"trigger": "go_back", "source": ["state1", "state2","state3","find_flight"], "dest": "user"},
+        {"trigger": "gobackitself", "source": ["find_flight1"], "dest": "find_flight"}
+        ,{"trigger": "forward", "source": ["state3"], "dest": "find_flight"}
+        ,{"trigger": "go_back", "source": ["state1", "state2","find_flight1"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,

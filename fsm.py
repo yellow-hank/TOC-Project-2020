@@ -1,5 +1,5 @@
 from transitions.extensions import GraphMachine
-from flights import get_arrival_flight_information,get_departure_flight_information
+from flights import get_arrival_flight_information,get_departure_flight_information,get_specific_flight_information
 from requests import request
 from utils import send_text_message,send_location_message
 import json
@@ -24,7 +24,11 @@ class TocMachine(GraphMachine):
     def is_going_to_find_flight(self,event):
         text = event.message.text
         
-        return text.lower()=="1"
+        return True
+    def is_going_to_find_flight1(self,event):
+        text = event.message.text
+        
+        return text.lower()!=""
     def on_enter_state1(self, event):
         print("I'm entering state1")
 
@@ -52,11 +56,11 @@ class TocMachine(GraphMachine):
         print("I'm entering state3")
         
         reply_token = event.reply_token
-        send_text_message(reply_token, "功能製作中")
+        send_text_message(reply_token, "請輸入航班編號\n若想離開此模式請輸入“離開”")
         #send_location_message(reply_token,'my location','台南',22.994821,120.196452)
-        #self.forward(event)
+        self.forward(event)
 
-    def on_exit_state3(self):
+    def on_exit_state3(self,*arg):
         print("Leaving state3")
 
     def on_enter_find_flight(self, event):
@@ -64,9 +68,25 @@ class TocMachine(GraphMachine):
         
         #reply_token = event.reply_token
         #send_text_message(reply_token, event.message.text)
-        print(event.message.text)
+        #print(event.message.text)
         #send_location_message(reply_token,'my location','台南',22.994821,120.196452)
-        #self.is_going_to_find_flight(event)
+        #self.gobackitself(event)
         
     def on_exit_find_flight(self,*arg):
+        print("Leaving find_flight")
+    def on_enter_find_flight1(self, event):
+        print("I'm entering find_flight")
+        
+        if(event.message.text=="離開"):
+            self.go_back()
+        
+        reply_token = event.reply_token
+        #call format
+        #print(get_specific_flight_information(event.message.text))
+        send_text_message(reply_token, get_specific_flight_information(event.message.text))
+        #print(event.message.text)
+        #send_location_message(reply_token,'my location','台南',22.994821,120.196452)
+        self.gobackitself(event)
+        
+    def on_exit_find_flight1(self,*arg):
         print("Leaving find_flight")
