@@ -18,7 +18,7 @@ def send_location_message(reply_token,title,address,latitude,longitude):
     line_bot_api.reply_message(reply_token,LocationSendMessage(title=title, address=address, latitude=latitude, longitude=longitude))
 
 
-def send_template_message(reply_token):
+def send_template_message(reply_token,event):
     line_bot_api = LineBotApi(channel_access_token)
     Carousel_template = TemplateSendMessage(
         alt_text='Carousel template',

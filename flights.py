@@ -123,6 +123,16 @@ def get_specific_flight_information(flight_no):
                 continue
             total_information += "\n\n"
     return total_information
+
+def get_specific_airport_information(airport_name):
+    a = Auth(app_id, app_key)
+    
+    request_web='https://ptx.transportdata.tw/MOTC/v2/Air/Airport/'+str(airport_name)+'?$format=JSON'
+    response = request('get', request_web, headers= a.get_auth_header())
+    p=json.loads(response.content)
+    airport_information=p['AirportName']['Zh_tw']
+
+    return airport_information
 """if __name__ == '__main__':
     a = Auth(app_id, app_key)
     response = request('get', 'https://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Airport/Arrival/TPE?$top=10&$format=JSON', headers= a.get_auth_header())

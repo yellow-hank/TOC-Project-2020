@@ -14,7 +14,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2","state3","find_flight","find_flight1"],
+    states=["user", "state1", "state2","state3","state4","find_flight","find_flight1","find_airport","find_airport1"],
     transitions=[
         {
             "trigger": "advance",
@@ -39,15 +39,36 @@ machine = TocMachine(
             "source": "state3",
             "dest": "find_flight",
             "conditions": "is_going_to_find_flight",
-        },{
+        },
+        {
             "trigger": "advance",
             "source": "find_flight",
             "dest": "find_flight1",
             "conditions": "is_going_to_find_flight",
         },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state4",
+            "conditions": "is_going_to_state4",
+        },
+        {
+            "trigger": "advance",
+            "source": "state4",
+            "dest": "find_airport",
+            "conditions": "is_going_to_find_airport",
+        },
+        {
+            "trigger": "advance",
+            "source": "find_airport",
+            "dest": "find_airport1",
+            "conditions": "is_going_to_find_airport",
+        },
+        {"trigger": "cycle", "source": ["find_airport1"], "dest": "find_airport"}
+        ,{"trigger": "forward_airport", "source": ["state4"], "dest": "find_airport"},
         {"trigger": "gobackitself", "source": ["find_flight1"], "dest": "find_flight"}
-        ,{"trigger": "forward", "source": ["state3"], "dest": "find_flight"}
-        ,{"trigger": "go_back", "source": ["state1", "state2","find_flight1"], "dest": "user"},
+        ,{"trigger": "forward_flight", "source": ["state3"], "dest": "find_flight"}
+        ,{"trigger": "go_back", "source": ["state1", "state2","state4","find_flight1","find_airport1"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
