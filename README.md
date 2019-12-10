@@ -79,11 +79,20 @@ The initial state is set to `user`.
 Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "即時入境航班"
+		* Reply: 回覆10筆此時在桃園機場的入境航班
+
+	* Input: "即時出境航班"
+		* Reply: 回覆10筆此時在桃園機場的出境境航班
+	* Input: "查詢特定航班"
+		* Input:航班編號（直到輸入“離開”才離開模式）
+		* Reply: 回覆此航班的狀態
+
+
+	* Input: "查詢特定機場"
+		* Input: 機場的英文簡稱
+		* Reply: 回覆機場的中文名稱
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
