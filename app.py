@@ -145,8 +145,8 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if event.message.text=="show-fsm":
-                machine.get_graph().draw("fsm.svg", prog="dot", format="svg")
-                send_image_message(event.reply_token,"https://airplaneinformation.herokuapp.com/show-fsm")
+                #machine.get_graph().draw("fsm.png", prog="dot", format="png")
+                send_image_message(event.reply_token,"https://imgur.com/Jl21HIq")
                 #send_text_message(event.reply_token, "hi")
             else:
                 send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班\n查詢特定機場")
@@ -156,8 +156,8 @@ def webhook_handler():
 
 @app.route("/show-fsm", methods=["GET"])
 def show_fsm():
-    machine.get_graph().draw("fsm.svg", prog="dot", format="svg")
-    return send_file("fsm.svg", mimetype="image/png")
+    machine.get_graph().draw("fsm.png", prog="dot", format="png")
+    return send_file("fsm.png", mimetype="image/png")
 
 
 if __name__ == "__main__":
