@@ -93,6 +93,10 @@ Every time `user` state is triggered to `advance` to another state, it will `go_
 	* Input: "查詢特定機場"
 		* Input: 機場的英文簡稱
 		* Reply: 回覆機場的中文名稱
+	* Input:"show-fsm"
+		* Reply:fsm的圖片
+	* Input:非相關指令
+		* Reply:提醒使用者有哪些指令
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
