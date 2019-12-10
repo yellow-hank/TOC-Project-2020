@@ -1,7 +1,7 @@
 import os
 
 from linebot import LineBotApi, WebhookParser
-from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage,LocationSendMessage,ImageSendMessage
 
 
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
@@ -17,6 +17,10 @@ def send_location_message(reply_token,title,address,latitude,longitude):
     line_bot_api = LineBotApi(channel_access_token)
     line_bot_api.reply_message(reply_token,LocationSendMessage(title=title, address=address, latitude=latitude, longitude=longitude))
 
+
+def send_image_message(reply_token,url):
+    line_bot_api = LineBotApi(channel_access_token)
+    line_bot_api.reply_message(reply_token,ImageSendMessage(original_content_url=url, preview_image_url=url))
 
 def send_template_message(reply_token,event):
     line_bot_api = LineBotApi(channel_access_token)

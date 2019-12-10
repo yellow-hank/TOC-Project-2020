@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message
+from utils import send_text_message,send_image_message
 
 load_dotenv()
 
@@ -144,7 +144,12 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班")
+            if event.message.text=="show-fsm":
+                machine.get_graph().draw("fsm.png", prog="dot", format="png")
+                send_image_message(event.reply_token,"https://airplaneinformation.herokuapp.com/show-fsm")
+                #send_text_message(event.reply_token, "hi")
+            else:
+                send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班")
 
     return "OK"
 
