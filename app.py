@@ -146,7 +146,7 @@ def webhook_handler():
         if response == False:
             if event.message.text=="show-fsm":
                 #machine.get_graph().draw("fsm.png", prog="dot", format="png")
-                send_image_message(event.reply_token,"https://imgur.com/Jl21HIq")
+                send_image_message(event.reply_token,"https://upload.cc/i1/2019/12/10/F01oDE.png")
                 #send_text_message(event.reply_token, "hi")
             else:
                 send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班\n查詢特定機場")
