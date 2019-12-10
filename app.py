@@ -68,7 +68,7 @@ machine = TocMachine(
         ,{"trigger": "forward_airport", "source": ["state4"], "dest": "find_airport"},
         {"trigger": "gobackitself", "source": ["find_flight1"], "dest": "find_flight"}
         ,{"trigger": "forward_flight", "source": ["state3"], "dest": "find_flight"}
-        ,{"trigger": "go_back", "source": ["state1", "state2","state4","find_flight1","find_airport1"], "dest": "user"},
+        ,{"trigger": "go_back", "source": ["state1", "state2","find_flight1","find_airport1"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
