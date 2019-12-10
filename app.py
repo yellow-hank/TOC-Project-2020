@@ -149,7 +149,7 @@ def webhook_handler():
                 send_image_message(event.reply_token,"https://airplaneinformation.herokuapp.com/show-fsm")
                 #send_text_message(event.reply_token, "hi")
             else:
-                send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班")
+                send_text_message(event.reply_token, "沒有此指令\n可以使用指令:\n即時出境航班\n即時入境航班\n查詢特定航班\n查詢特定機場")
 
     return "OK"
 
