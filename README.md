@@ -1,15 +1,13 @@
-# TOC Project 2020
+# Airline information robot
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/dc7fa47fcd809b99d087/maintainability)](https://codeclimate.com/github/NCKU-CCS/TOC-Project-2020/maintainability)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020/badge.svg)](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020)
 
+## Introduction
 
-Template Code for TOC Project 2020
+It is a line robot  based on a finite state machine and it will acccess Public Transport data exchange API and get the latest airline information.With inputing instruction the robot will return the latest arrival airline information or departure airline information.Also, it can look up information of airport.
 
-A Line bot based on a finite state machine
-
-More details in the [Slides](https://hackmd.io/@TTW/ToC-2019-Project#) and [FAQ](https://hackmd.io/s/B1Xw7E8kN)
 
 ## Setup
 
